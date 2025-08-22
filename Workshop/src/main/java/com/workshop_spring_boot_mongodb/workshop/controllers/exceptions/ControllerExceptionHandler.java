@@ -19,5 +19,4 @@ public class ControllerExceptionHandler {
         StandarError err = new StandarError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
-
 }
