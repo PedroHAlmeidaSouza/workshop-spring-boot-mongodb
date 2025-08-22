@@ -1,5 +1,6 @@
 package com.workshop_spring_boot_mongodb.workshop.controllers;
 
+import com.workshop_spring_boot_mongodb.workshop.dto.UserDTO;
 import com.workshop_spring_boot_mongodb.workshop.entities.User;
 import com.workshop_spring_boot_mongodb.workshop.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,12 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
 
         List<User> list = userService.findAll();
 
-        return ResponseEntity.ok(list);
+        List<UserDTO> listDTO = list.stream().map(UserDTO::new).toList();
+
+        return ResponseEntity.ok(listDTO);
     }
 }
