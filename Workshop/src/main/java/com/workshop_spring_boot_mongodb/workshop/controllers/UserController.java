@@ -1,6 +1,7 @@
 package com.workshop_spring_boot_mongodb.workshop.controllers;
 
 import com.workshop_spring_boot_mongodb.workshop.dto.UserDTO;
+import com.workshop_spring_boot_mongodb.workshop.entities.Post;
 import com.workshop_spring_boot_mongodb.workshop.entities.User;
 import com.workshop_spring_boot_mongodb.workshop.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +56,12 @@ public class UserController {
         obj.setId(id);
         obj = userService.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+
+        User obj = userService.findById(id);
+        return ResponseEntity.ok(obj.getPosts());
     }
 }
